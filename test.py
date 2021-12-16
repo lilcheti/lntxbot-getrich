@@ -1,19 +1,21 @@
 from telethon.sync import TelegramClient, events
 import config
+import asyncio
+from random import randint
+from time import sleep
 api_id = config.API_ID
 api_hash = config.API_HASH
 coroutines = []
 
-import asyncio
-
 async def listen(client):
-   await client.connect()
-   await client.run_until_disconnected()
+
    @client.on(events.NewMessage(from_users="lntxbot"))
    async def handler(event):
       print(await event.get_sender())
+      //sleep(randint(10,100))
       await event.click(1)
-   
+   await client.connect()
+   await client.run_until_disconnected()
 
 async def main():
    for i in range(config.ACC_NUMBER):
